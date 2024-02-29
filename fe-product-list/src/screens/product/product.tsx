@@ -4,7 +4,6 @@ import { useGetProductByIdQuery } from '../../redux/services/products.api';
 import { ProductInfo, ProductInfoSkeleton } from './product-info/product-info';
 import styles from './product.module.scss';
 import { ProductComments } from './product-comments/product-comments';
-import { useAppSelector } from '../../hooks/reduxHooks';
 
 export const ProductScreen = () => {
   const params = useParams();

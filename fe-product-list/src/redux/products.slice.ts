@@ -29,9 +29,11 @@ const productsSlice = createSlice({
     removeProduct(state, action: PayloadAction<string>) {
       state.products = state.products.filter((p) => p.id !== action.payload);
     },
-    updateProduct(state, action: PayloadAction<IProduct>) {
+    updateProduct(state, action: PayloadAction<Omit<IProduct, 'comments'>>) {
       const index = state.products.findIndex((p) => p.id === action.payload.id);
-      state.products[index] = action.payload;
+      console.log(index, action.payload);
+
+      state.products[index] = { ...action.payload, comments: [] };
     },
   },
   extraReducers: (builder) => {
@@ -41,7 +43,7 @@ const productsSlice = createSlice({
       })
       .addMatcher(productsApi.endpoints.getAllProducts.matchFulfilled, (state, action) => {
         state.loading = 'fulfilled';
-        state.products = action.payload; // Assuming the payload structure matches your state
+        state.products = action.payload;
       })
       .addMatcher(productsApi.endpoints.getAllProducts.matchRejected, (state, action) => {
         state.loading = 'rejected';
