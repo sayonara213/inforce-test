@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ICreateProduct, IProduct } from '../types/product.types';
 import { productsApi } from './services/products.api';
-import { isPending, isFulfilled, isRejected } from '@reduxjs/toolkit';
 
 type LoadingState = 'idle' | 'pending' | 'fulfilled' | 'rejected';
 
@@ -18,7 +17,14 @@ const productsSlice = createSlice({
     addProduct(state, action: PayloadAction<ICreateProduct>) {
       const { name, weight, count, imageUrl } = action.payload;
 
-      state.products.push({ name, weight, count, imageUrl, id: Date.now().toString() });
+      state.products.push({
+        name,
+        weight,
+        count,
+        imageUrl,
+        id: Date.now().toString(),
+        comments: [],
+      });
     },
     removeProduct(state, action: PayloadAction<string>) {
       state.products = state.products.filter((p) => p.id !== action.payload);

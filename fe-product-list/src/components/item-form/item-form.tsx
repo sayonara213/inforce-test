@@ -1,5 +1,5 @@
 import React from 'react';
-import { IProduct } from '../../types/product.types';
+import { ICreateProduct, IProduct } from '../../types/product.types';
 import { useForm, zodResolver } from '@mantine/form';
 import { Box, Button, Flex, Group, NumberInput, TextInput } from '@mantine/core';
 import { useAppDispatch } from '../../hooks/reduxHooks';
@@ -12,13 +12,11 @@ interface ItemFormProps {
   close: () => void;
 }
 
-type IFormValues = Omit<IProduct, 'id'>;
-
 export const ItemForm: React.FC<ItemFormProps> = ({ product, close }) => {
   const dispatch = useAppDispatch();
   const [serverAddProduct, { isLoading, isSuccess, isError, error }] = useAddProductMutation();
 
-  const initialValues: IFormValues = {
+  const initialValues: ICreateProduct = {
     name: (product && product.name) || '',
     weight: (product && product.weight) || 0,
     count: (product && product.count) || 0,
@@ -30,7 +28,7 @@ export const ItemForm: React.FC<ItemFormProps> = ({ product, close }) => {
     validate: zodResolver(schema),
   });
 
-  const handleAddProductOptimistic = async (values: IFormValues) => {
+  const handleAddProductOptimistic = async (values: ICreateProduct) => {
     try {
       await serverAddProduct(values);
       dispatch(addProduct({ ...values }));
@@ -40,7 +38,7 @@ export const ItemForm: React.FC<ItemFormProps> = ({ product, close }) => {
     }
   };
 
-  const handleSubmit = (values: IFormValues) => {
+  const handleSubmit = (values: ICreateProduct) => {
     handleAddProductOptimistic(values);
   };
 
