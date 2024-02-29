@@ -12,7 +12,7 @@ export const ItemsList: React.FC<ItemsListProps> = ({ products }) => {
   const [serverDeleteProduct] = useDeleteProductMutation();
 
   return (
-    <SimpleGrid cols={3}>
+    <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }}>
       {products.map((product) => (
         <ItemCard key={product.id} product={product} deleteProduct={serverDeleteProduct} />
       ))}
