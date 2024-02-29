@@ -37,7 +37,7 @@ export class ProductController {
     return this.productService.updateProduct(id, product);
   }
 
-  @Post('comment/:id')
+  @Post('product/comment/:id')
   async addComment(
     @Param('id') id: string,
     @Body('comment') comment: string,

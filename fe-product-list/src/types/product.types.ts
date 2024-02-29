@@ -11,7 +11,7 @@ export interface IProduct {
   imageUrl: string;
   count: number;
   weight: number;
-  comments?: IComment[];
+  comments: IComment[];
 }
 
 export interface ICreateProduct {

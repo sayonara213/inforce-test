@@ -32,6 +32,13 @@ export const productsApi = createApi({
         method: 'DELETE',
       }),
     }),
+    addComment: mutation<IProduct, { id: string; comment: string }>({
+      query: ({ id, comment }) => ({
+        url: `${API_URL.product}/comment/${id}`,
+        method: 'POST',
+        body: { comment },
+      }),
+    }),
   }),
 });
 
@@ -41,4 +48,5 @@ export const {
   useAddProductMutation,
   useDeleteProductMutation,
   useUpdateProductMutation,
+  useAddCommentMutation,
 } = productsApi;
