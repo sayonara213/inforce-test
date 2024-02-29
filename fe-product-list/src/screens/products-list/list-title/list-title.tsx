@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Button, Flex, Text } from '@mantine/core';
+import { AddItem } from './add-item/add-item';
 
 export const ListTitle: React.FC = () => {
   return (
@@ -9,7 +10,7 @@ export const ListTitle: React.FC = () => {
         Products:
       </Text>
       <Flex gap={6}>
-        <Button>Add Product</Button>
+        <AddItem />
         <Button variant='outline'>Sort by</Button>
       </Flex>
     </Flex>
